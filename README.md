@@ -4,7 +4,9 @@ Analysis of vulnerabilities I discover during my **security audit**. Including m
 
 ## Analysis list
 
-+ [CVE-2021-43849](/CVE-2021-43849/README.md) - Mobile Android - Denial of Service(DoS)
+| Name|Field|Vulnerability|Type|
+| :--- |:---:|:---:|:---:|---:|
+| [CVE-2021-43849](/CVE-2021-43849/README.md)| Mobile - Android| Denial of Service(DoS)| N-Day | [Proof of Concept(PoC)](/CVE-2021-43849/README.md)
 
 ## Glossary
 
