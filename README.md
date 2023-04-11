@@ -1,6 +1,6 @@
 # My days and not
 
-Analysis of vulnerabilities that I find interesting during my **Penetration Testing activities**. Including my zero-day exploits and vulnerability analysis without a public PoC.
+Analysis of vulnerabilities I discover during my security audit. Including my zero-day exploits and vulnerability analysis without public PoC(N-day).
 
 ## Analysis list
 
