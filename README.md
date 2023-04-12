@@ -1,6 +1,6 @@
 # My days and not
 
-Analysis of vulnerabilities I discover during my **security audit**. Including my **zero-day** exploits and vulnerability analysis without public PoC(**N-day**).
+Analysis of interesting vulnerabilities I discover during my **security audit**. Including my **zero-day** exploits and vulnerability analysis without public PoC(**N-day**).
 
 ## Analysis list
 
