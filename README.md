@@ -15,4 +15,4 @@ Analysis of vulnerabilities I discover **security audit** || **CTF** (Capture th
 ## CTF Writeups
 | Name           | Field            | Vulnerability           | Writeup  
 |----------------|------------------|-------------------------|-------------------------------------------------------------------------------------
-| ConfigEditor   | Mobile - Android | Java Deserialization    | [Link 2 Writeup](/CVE-2022-1472/README.md)                                          | [MHL CTF](https://www.mobilehackinglab.com/course/lab-config-editor-rce)|
+| ConfigEditor   | Mobile - Android | Java Deserialization    | [Link 2 Writeup](/ConfigEditor/README.md)                                          | [MHL CTF](https://www.mobilehackinglab.com/course/lab-config-editor-rce)|
