@@ -2,8 +2,6 @@
 
 Analysis of vulnerabilities I discover **security audit** || **CTF** (Capture the Flag).
 
-Including **zero-day** exploits and vulnerability analysis without public PoC(**N-day**).
-
 ## Analysis list
 
 | Name           | Field            | Vulnerability           | Proof of Concept(PoC)                                                               | Notes                |
