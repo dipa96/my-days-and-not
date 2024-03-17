@@ -17,10 +17,15 @@ Prima di lanciarci in analisi statiche e dinamiche cerchiamo di capire cosa fa l
 
 All'apertura ci viene richiesto la possibilità di accedere a foto e media sul device. Clicchiamo su Allow
 
-[<img src="img/Access.png" width="250"/>](Access.png)
+<p align="center">
+<img src="img/Access.png" width="250"/>
+</p>
 
 Abbiamo a disposizione 2 bottoni, Load and Save.
-![Alt text](/ConfigEditor/img/1.png)
+
+<p align="center">
+<img src="img/1.png" width="250"/>
+</p>
 
 Cliccando su Load vediamo che l'applicazione ha caricato un file example.yaml nei nostri download. Selezioniamo il file e vediamo che il file viene parsato dall'applicazione.
 
@@ -37,7 +42,7 @@ Di seguito alcune considerazioni sul file `AndroidManifest.xml`
 
 ### Permissions
 
-La nostra applicazione, come dichiarato nel manifest ha la possibilità di connettersi ad Internet, e 
+La nostra applicazione, come dichiarato nel manifest ha la possibilità di connettersi ad Internet, e
 gestire i file sulla memoria esterna (sdcard), infatti come successo nella fase di recon una volta dato accesso alla memoria è stato caricato un file example.yaml nei download della sdcard. Senza questi permessi non sarebbe stato possibile. I permessi per Internet non vengono esplicitamente chiesti (inserire il perchè). Di seguito lo snippet di XML di cui stiamo parlando:
 
 ```xml
