@@ -19,7 +19,7 @@ Upon the first launch, you'll be asked to grant permissions to manage external s
 
 The app features a simple interface with two buttons (Load and Save) and an empty text view.
 
-When you click "Load," the file manager opens, displaying the contents of the SD card. Here, you'll see a file named example.yaml ready for you to select and load into the application.
+When you click "Load," the file manager opens, displaying the contents of the SD card. Here, you'll see a file named "example.yaml" ready for you to select and load into the application.
 
 You'll notice that the app is designed for parsing YAML files and potentially modifying them. Feel free to explore the loaded file and make any necessary changes.
 
