@@ -16,7 +16,7 @@ Achieve Remote Code Execution via a Config Editor app in Android by exploiting v
 Prima di lanciarci in analisi statiche e dinamiche cerchiamo di capire cosa fa l'applicazione.. semplicemente.. usandola
 
 All'apertura ci viene richiesto la possibilità di accedere a foto e media sul device. Clicchiamo su Allow
-![Alt text](/ConfigEditor/img/access.png)
+![Alt text](/ConfigEditor/img/Access.png)
 
 Abbiamo a disposizione 2 bottoni, Load and Save.
 ![Alt text](/ConfigEditor/img/1.png)
