@@ -18,34 +18,33 @@ Prima di lanciarci in analisi statiche e dinamiche cerchiamo di capire cosa fa l
 All'apertura ci viene richiesto la possibilità di accedere a foto e media sul device. Clicchiamo su Allow
 
 <p align="center">
-<img src="img/Access.png" width="350"/>
+<img src="assets/Access.png" width="350"/>
 </p>
 
 Abbiamo a disposizione 2 bottoni, Load and Save.
 
 <p align="center">
-<img src="img/1.png" width="350"/>
+<img src="assets/1.png" width="350"/>
 </p>
 
 Cliccando su Load vediamo che l'applicazione ha caricato un file example.yaml nei nostri download. Selezioniamo il file e vediamo che il file viene parsato dall'applicazione.
 
 <p align="center">
-<img src="img/app.png" width="350"/>
+<img src="assets/app.png" width="350"/>
 </p>
 
 Cliccando su Save invece possiamo salvare il medesimo file sul dispositivo.
 
 ## Static Analysis
 
-Analizziamo il file `AndroidManifest.xml``
-Personalmente ho utilizzato il tool jadx-gui. Ma per leggere il file ci sono molti altri modi. (unzip, apktool)
-
+Analizziamo prima il file `AndroidManifest.xml`
 Di seguito alcune considerazioni sul file `AndroidManifest.xml`
 
 ### Permissions
 
 La nostra applicazione, come dichiarato nel manifest ha la possibilità di connettersi ad Internet, e
-gestire i file sulla memoria esterna (sdcard), infatti come successo nella fase di recon una volta dato accesso alla memoria è stato caricato un file example.yaml nei download della sdcard. Senza questi permessi non sarebbe stato possibile. I permessi per Internet non vengono esplicitamente chiesti (inserire il perchè). Di seguito lo snippet di XML di cui stiamo parlando:
+gestire i file sulla memoria esterna (sdcard), infatti come successo nella fase di recon una volta dato accesso alla memoria è stato caricato un file example.yaml nei download della sdcard, senza questi permessi non sarebbe stato possibile. 
+I permessi per Internet non vengono esplicitamente chiesti (inserire il perchè). Di seguito lo snippet di XML di cui stiamo parlando:
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET"/>
