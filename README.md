@@ -16,4 +16,4 @@ Analysis of vulnerabilities from **security audit** || **CTF** (Capture the Flag
 | Name           | Field            | Vulnerability           | Writeup  
 |----------------|------------------|-------------------------|-------------------------------------------------------------------------------------
 | ConfigEditor   | Mobile - Android | Java Deserialization    | [Link 2 Writeup](/ConfigEditor/README.md)                                          | [MHL CTF](https://www.mobilehackinglab.com/course/lab-config-editor-rce)|
-| Europa | Network/Web | Mixed | [Link 2 Writeup](https://gist.github.com/dipa96/16fbbc204d8d7daac581ed52c421d363) | [HTB](https://app.hackthebox.com/machines/27) |
+| Europa | Web | Mixed | [Link 2 Writeup](https://gist.github.com/dipa96/16fbbc204d8d7daac581ed52c421d363) | [HTB](https://app.hackthebox.com/machines/27) |
