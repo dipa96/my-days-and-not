@@ -2,4 +2,60 @@
 
 Achieve Remote Code Execution via a Config Editor app in Android by exploiting vulnerabilities in a third party library.
 
-![Alt text](/ConfigEditor/img/img1.png)
+## Reconnaissance
+
+Prima di lanciarci in analisi statiche e dinamiche cerchiamo di capire cosa fa l'applicazione.. semplicemente.. usandola
+
+All'apertura ci viene richiesto la possibilità di accedere a foto e media sul device. Clicchiamo su Allow
+![Alt text](/ConfigEditor/img/access.png)
+
+Abbiamo a disposizione 2 bottoni, Load and Save.
+![Alt text](/ConfigEditor/img/1.png)
+
+Cliccando su Load vediamo che l'applicazione ha caricato un file example.yaml nei nostri download. Selezioniamo il file e vediamo che il file viene parsato dall'applicazione.
+
+![Alt text](/ConfigEditor/img/app.png)
+
+Cliccando su Save invece possiamo salvare il medesimo file sul dispositivo.
+
+## Static
+
+Analizziamo il file `AndroidManifest.xml``
+Personalmente ho utilizzato il tool jadx-gui. Ma per leggere il file ci sono molti altri modi. (unzip, apktool)
+
+Di seguito alcune considerazioni sul file `AndroidManifest.xml`
+
+### Permissions
+
+La nostra applicazione, come dichiarato nel manifest ha la possibilità di connettersi ad Internet, e 
+gestire i file sulla memoria esterna (sdcard), infatti come successo nella fase di recon una volta dato accesso alla memoria è stato caricato un file example.yaml nei download della sdcard. Senza questi permessi non sarebbe stato possibile. I permessi per Internet non vengono esplicitamente chiesti (inserire il perchè). Di seguito lo snippet di XML di cui stiamo parlando: 
+
+```xml
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+```
+
+MainActivity
+
+```xml
+       <activity android:name="com.mobilehackinglab.configeditor.MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="file"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:mimeType="application/yaml"/>
+            </intent-filter>
+        </activity>
+```
+
+Look into MainActivity
+
