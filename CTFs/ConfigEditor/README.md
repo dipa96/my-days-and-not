@@ -18,18 +18,20 @@ Prima di lanciarci in analisi statiche e dinamiche cerchiamo di capire cosa fa l
 All'apertura ci viene richiesto la possibilità di accedere a foto e media sul device. Clicchiamo su Allow
 
 <p align="center">
-<img src="img/Access.png" width="250"/>
+<img src="img/Access.png" width="350"/>
 </p>
 
 Abbiamo a disposizione 2 bottoni, Load and Save.
 
 <p align="center">
-<img src="img/1.png" width="250"/>
+<img src="img/1.png" width="350"/>
 </p>
 
 Cliccando su Load vediamo che l'applicazione ha caricato un file example.yaml nei nostri download. Selezioniamo il file e vediamo che il file viene parsato dall'applicazione.
 
-![Alt text](/ConfigEditor/img/app.png)
+<p align="center">
+<img src="img/app.png" width="350"/>
+</p>
 
 Cliccando su Save invece possiamo salvare il medesimo file sul dispositivo.
 
