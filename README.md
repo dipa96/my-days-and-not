@@ -13,8 +13,8 @@ Analysis of vulnerabilities from **security audit** || **CTF** (Capture the Flag
 | CVE-2022-3860  | Web Application  | SQL Injection(SQLi)     | [Link 2 PoC](https://wpscan.com/vulnerability/d99ce21f-fbb6-429c-aa3b-19c4a5eb7557) 
 
 ## CTF Writeups
-| Name           | Field            | Vulnerability           | Writeup  
-|----------------|------------------|-------------------------|-------------------------------------------------------------------------------------
+| Name           | Field            | Vulnerability           | Writeup                                                                            | Platform
+|----------------|------------------|-------------------------|-------------------------------------------------------------------------------------------------
 | ConfigEditor   | Mobile - Android | Java Deserialization    | [Link 2 Writeup](/ConfigEditor/README.md)                                          | [MHL CTF](https://www.mobilehackinglab.com/course/lab-config-editor-rce) |
 | Europa | Web Application | Mixed | [Link 2 Writeup](https://gist.github.com/dipa96/16fbbc204d8d7daac581ed52c421d363) | [HTB](https://app.hackthebox.com/machines/27) |
 | Bank | Web Application | Mixed | [Link 2 Writeup](https://gist.github.com/dipa96/d509ea39d1c00dcf5e736a8b72885ee6) | [HTB](https://app.hackthebox.com/machines/Bank) |
