@@ -2,7 +2,16 @@
 
 Achieve Remote Code Execution via a Config Editor app in Android by exploiting vulnerabilities in a third party library.
 
-## Reconnaissance
+## Table of Contents
+
+1. [Look Around](#look-around)
+2. [Static Analysis](#static-analysis)
+3. [Dynamic Analysis](#dynamic-analysis)
+4. [Exploiting](#exploiting)
+5. [Shell is the way](#shell-is-the-way)
+6. [And now?](#and-now)
+
+## Look Around
 
 Prima di lanciarci in analisi statiche e dinamiche cerchiamo di capire cosa fa l'applicazione.. semplicemente.. usandola
 
@@ -18,7 +27,7 @@ Cliccando su Load vediamo che l'applicazione ha caricato un file example.yaml ne
 
 Cliccando su Save invece possiamo salvare il medesimo file sul dispositivo.
 
-## Static
+## Static Analysis
 
 Analizziamo il file `AndroidManifest.xml``
 Personalmente ho utilizzato il tool jadx-gui. Ma per leggere il file ci sono molti altri modi. (unzip, apktool)
@@ -28,7 +37,7 @@ Di seguito alcune considerazioni sul file `AndroidManifest.xml`
 ### Permissions
 
 La nostra applicazione, come dichiarato nel manifest ha la possibilità di connettersi ad Internet, e 
-gestire i file sulla memoria esterna (sdcard), infatti come successo nella fase di recon una volta dato accesso alla memoria è stato caricato un file example.yaml nei download della sdcard. Senza questi permessi non sarebbe stato possibile. I permessi per Internet non vengono esplicitamente chiesti (inserire il perchè). Di seguito lo snippet di XML di cui stiamo parlando: 
+gestire i file sulla memoria esterna (sdcard), infatti come successo nella fase di recon una volta dato accesso alla memoria è stato caricato un file example.yaml nei download della sdcard. Senza questi permessi non sarebbe stato possibile. I permessi per Internet non vengono esplicitamente chiesti (inserire il perchè). Di seguito lo snippet di XML di cui stiamo parlando:
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -37,7 +46,7 @@ gestire i file sulla memoria esterna (sdcard), infatti come successo nella fase 
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 ```
 
-MainActivity
+MainActivity and deep link explained
 
 ```xml
        <activity android:name="com.mobilehackinglab.configeditor.MainActivity" android:exported="true">
@@ -57,5 +66,23 @@ MainActivity
         </activity>
 ```
 
-Look into MainActivity
++ Look into MainActivity and what happen
++ SnakeYaml CVE
++ Fast Analysis CVE
++ SemGrep Rules
 
+## Dynamic Analysis
+
++ Test DeepLink and what happen with yaml
+
+## Exploiting
+
++ Adapt exploit to Android Env + Gadget Sink and how to discover
+
+## Shell is the way
+
++ RCE yes, but where is the shell? method with c script and dalvikvm method
+
+## And now?
+
++ Android Kernel Privesc, Sandbox Escape, etc
