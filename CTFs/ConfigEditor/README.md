@@ -142,7 +142,7 @@ output: pwn.txt # in listing file
 ## Shell is the way
 
 Running commands is nice, but what about a shell? <3  
-Initially, I tried to execute the classic reverse shells that are publicly available, such as those found on [revshell](https://www.revshells.com/) or by uploading a compiled one in `C` (you can find an example in the current folder).
+Initially, I tried to execute the classic reverse shells that are publicly available, such as those found on [revshell](https://www.revshells.com/) or by uploading a compiled one in `C` (you can find an example in the current folder as `shell.c`).
 
 While exploring various possibilities, I came across this methodology on [malacupa.com](https://malacupa.com/2018/10/25/android-command-line-reverse-shell) which utilizes compiling Java code to be executed by ART/Dalvik on Android’s command line.
 
