@@ -13,38 +13,16 @@ Achieve Remote Code Execution via a Config Editor app in Android by exploiting v
 
 ## Look Around
 
-Prima di lanciarci in analisi statiche e dinamiche cerchiamo di capire cosa fa l'applicazione.. semplicemente.. usandola
-
-All'apertura ci viene richiesto la possibilità di accedere a foto e media sul device. Clicchiamo su Allow
-
-<p align="center">
-<img src="assets/Access.png" width="350"/>
-</p>
-
-Abbiamo a disposizione 2 bottoni, Load and Save.
-
-<p align="center">
-<img src="assets/1.png" width="350"/>
-</p>
-
-Cliccando su Load vediamo che l'applicazione ha caricato un file example.yaml nei nostri download. Selezioniamo il file e vediamo che il file viene parsato dall'applicazione.
-
-<p align="center">
-<img src="assets/app.png" width="350"/>
-</p>
-
-Cliccando su Save invece possiamo salvare il medesimo file sul dispositivo.
+L'applicazione viene utilizzata per leggere file con estensione `.yaml`
 
 ## Static Analysis
 
-Analizziamo prima il file `AndroidManifest.xml`
-Di seguito alcune considerazioni sul file `AndroidManifest.xml`
+Considerazioni sul file `AndroidManifest.xml`
 
 ### Permissions
 
-La nostra applicazione, come dichiarato nel manifest ha la possibilità di connettersi ad Internet, e
-gestire i file sulla memoria esterna (sdcard), infatti come successo nella fase di recon una volta dato accesso alla memoria è stato caricato un file example.yaml nei download della sdcard, senza questi permessi non sarebbe stato possibile. 
-I permessi per Internet non vengono esplicitamente chiesti (inserire il perchè). Di seguito lo snippet di XML di cui stiamo parlando:
++ `READ_EXTERNAL_STORAGE`, `WRITE_EXTERNAL_STORAGE`, `MANAGE_EXTERNAL_STORAGE` , permessi per permettere all'applicazione di potere salvare, leggere e scrivere file sulla memoria esterna `sdcard`
++ `INTERNET` , utilizzata per accedere ad Internet
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -53,7 +31,8 @@ I permessi per Internet non vengono esplicitamente chiesti (inserire il perchè)
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 ```
 
-MainActivity and deep link explained
+An implicitly exported component could allow access to the component Activity, MainActivity.
+In questo caso, l'applicazione gestirà i link con scheme `file://`, `http://` e `https://` e file con estensione  `.yaml`
 
 ```xml
        <activity android:name="com.mobilehackinglab.configeditor.MainActivity" android:exported="true">
@@ -72,6 +51,21 @@ MainActivity and deep link explained
             </intent-filter>
         </activity>
 ```
+
+Sanity check:
+
+1. Crea un file `yaml`
+2. Metti in ascolto un listener python sulla porta 8080
+3. Simula una connessione http con un file yaml con adb
+L'applicazione dovrebbe aprirsi e tenterà di leggere il file (se vuoto, l'output sarà vuoto)
+
+Commands:
+```sh
+$linux> touch example.yaml
+$linux> python3 -m http.server 8080
+$linux> adb shell am start -a android.intent.action.VIEW -d  "http://$IP:8080/example.yaml" -n com.mobilehackinglab.configeditor/.MainActivity
+```
+
 
 + Look into MainActivity and what happen
 + SnakeYaml CVE
