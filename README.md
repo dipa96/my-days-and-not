@@ -1,6 +1,6 @@
 # My days and not
 
-Analysis of vulnerabilities I discover **security audit** || **CTF** (Capture the Flag).
+Analysis of vulnerabilities from **security audit** || **CTF** (Capture the Flag).
 
 ## CVE Analysis list
 
