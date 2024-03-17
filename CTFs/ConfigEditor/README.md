@@ -9,9 +9,7 @@ Achieve Remote Code Execution via a Config Editor app in Android by exploiting v
 3. [Dynamic Analysis](#dynamic-analysis)
 4. [Exploiting](#exploiting)
 5. [Shell is the way](#shell-is-the-way)
-6. [And now?](#and-now)
-7. [Utils](#utils)
-8. [References](#references)
+6. [References](#references)
 
 ## Look Around
 
