@@ -15,16 +15,27 @@ Achieve Remote Code Execution via a Config Editor app in Android by exploiting v
 
 ## Look Around
 
-L'applicazione viene utilizzata per leggere file con estensione `.yaml`
+TL;DR
+
+Upon the first launch, you'll be asked to grant permissions to manage external storage. This is necessary for the app to access files on your device's SD card.
+
+The app features a simple interface with two buttons (Load and Save) and an empty text view.
+
+When you click "Load," the file manager opens, displaying the contents of the SD card. Here, you'll see a file named example.yaml ready for you to select and load into the application.
+
+You'll notice that the app is designed for parsing YAML files and potentially modifying them. Feel free to explore the loaded file and make any necessary changes.
+
+After making modifications, simply click the "Save" button to store the changes back to the external storage.
 
 ## Static Analysis
 
-Considerazioni sul file `AndroidManifest.xml`
+After decompiling the application with `apktool -d ConfigEditor.apk`, we can examine the `AndroidManifest.xml` file to understand the application's structure and permissions.
 
 ### Permissions
 
-+ `READ_EXTERNAL_STORAGE`, `WRITE_EXTERNAL_STORAGE`, `MANAGE_EXTERNAL_STORAGE` , permessi per permettere all'applicazione di potere salvare, leggere e scrivere file sulla memoria esterna `sdcard`
-+ `INTERNET` , utilizzata per accedere ad Internet
++ READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, MANAGE_EXTERNAL_STORAGE: These permissions allow the application to read from, write to, and manage files on external storage, such as the SD card. This enables the application to save and access files stored externally.
+
++ INTERNET: This permission allows the application to access the internet. It is typically used for network communication, enabling the application to connect to remote servers or services over the internet.
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -35,8 +46,9 @@ Considerazioni sul file `AndroidManifest.xml`
 
 ### Implicitly Exported Component
 
-An implicitly exported component could allow access to the component Activity, MainActivity.
-In questo caso, l'applicazione gestirà i link con scheme `file://`, `http://` e `https://` e file con estensione  `.yaml`
+In this case, the application is implicitly exporting a component, specifically the `MainActivity`, which could allow access to it from external sources.
+
+The application handles links with schemes file://, http://, and https://, as well as files with the `.yaml` extension. This implies that the `MainActivity` component may be invoked or accessed when these types of links or files are interacted with. This behavior could introduce security risks, especially if the `MainActivity` component performs sensitive operations or accesses sensitive data.
 
 ```xml
        <activity android:name="com.mobilehackinglab.configeditor.MainActivity" android:exported="true">
@@ -58,17 +70,21 @@ In questo caso, l'applicazione gestirà i link con scheme `file://`, `http://` e
 
 ### MainActivity & yaml.load
 
-`loadYaml` funzione interessante al suo interno: `Object deserializedData = yaml.load(inputStream);`
-Vediamo, attraverso gli `import` nell'app e nelle subdirectory presenti `/org/yaml/snakeyaml` che il metodo `load`
-proviene da SnakeYAML.
-Da documentazione: `SnakeYAML is a YAML 1.1 processor for the Java Virtual Machine version 8+.`
-Cercando su internet per SnakeYAML e Deserialization notiamo che [CVE](https://nvd.nist.gov/vuln/detail/CVE-2022-1471)
+Let's specifically examine what aspects of the code related to the `MainActivity` component should concern us.
+
+The `loadYaml` function is of particular interest due to its usage of `Object deserializedData = yaml.load(inputStream);` internally.
+
+Upon examining the imports in the application and its subdirectories, specifically `/org/yaml/snakeyaml`, we observe that the `load` method originates from SnakeYAML.
+
+According to the documentation, `SnakeYAML is a YAML 1.1 processor designed for the Java Virtual Machine version 8 and above`.
+
+Further research on SnakeYAML and deserialization reveals a vulnerability documented under `CVE-2022-1471`.
 
 ```txt
 SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization. We recommend upgrading to version 2.0 and beyond.
 ```
 
-Non sono stato in grado di trovare la versione esatta di SnakeYAML ma cercando per SnakeYaml's `SafeConsturctor` in `/org/yaml/snakeyaml` non troviamo occorrenze quindi ho presupposto fosse una buona strada da perseguire.
+I wasn't able to locate the exact version of SnakeYAML used in the application. However, upon searching for SnakeYAML's `SafeConstructor` in `/org/yaml/snakeyaml`, I found no occurrences. Therefore, I assumed it would be a good path to pursue for further investigation.
 
 ## Dynamic Analysis
 
