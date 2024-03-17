@@ -42,9 +42,9 @@ After decompiling the application with `apktool -d ConfigEditor.apk`, we can exa
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 ```
 
-### Implicitly Exported Component
+### Explicit and Implicitly Exported Component
 
-In this case, the application is implicitly exporting a component, specifically the `MainActivity`, which could allow access to it from external sources.
+In this case, the application is explicit and implicitly exporting a component, specifically the `MainActivity`, which could allow access to it from external sources.
 
 The application handles links with schemes `file://`, `http://`, and `https://`, as well as files with the `.yaml` extension. This implies that the `MainActivity` component may be invoked or accessed when these types of links or files are interacted with. This behavior could introduce security risks, especially if the `MainActivity` component performs sensitive operations or accesses sensitive data.
 
