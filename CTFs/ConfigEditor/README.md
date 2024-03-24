@@ -146,7 +146,7 @@ Initially, I tried to execute the classic reverse shells that are publicly avail
 
 While exploring various possibilities, I came across this methodology on [malacupa.com](https://malacupa.com/2018/10/25/android-command-line-reverse-shell) which utilizes compiling Java code to be executed by ART/Dalvik on Android’s command line.
 
-Initially it didn't seem to work with the tools in the 2018 writeup, so I decided to follow this approach to create a payload in the YAML file and unveil this beautiful approach, which would immediately give us a shell when opening the file, taking advantage of Android's `dalvikvm' CLI command.
+Initially it didn't seem to work with the tools in the 2018 writeup, so I decided to follow this approach to create a payload in the YAML file and unveil this beautiful approach, which would immediately give us a shell when opening the file, taking advantage of Android's `dalvikvm` CLI command.
 
 ```sh
 # Compile AndroidReverseShell.java (is in this github folder) using Java compiler (javac) with release 17
