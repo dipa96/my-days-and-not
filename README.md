@@ -10,7 +10,9 @@ Analysis of vulnerabilities from **security audit** || **CTF** (Capture the Flag
 | CVE-2022-2071  | Web Application  | CSRF + XSS              | [Link 2 PoC](https://wpscan.com/vulnerability/d3653976-9e0a-4f2b-87f7-26b5e7a74b9d) 
 | CVE-2022-2072  | Web Application  | XSS                     | [Link 2 PoC](https://wpscan.com/vulnerability/3014540c-21b3-481c-83a1-ce3017151af4) 
 | CVE-2022-3241  | Web Application  | SQL Injection(SQLi)     | [Link 2 PoC](https://wpscan.com/vulnerability/a995dd67-43fc-4087-a7f1-5db57f4c828c) 
-| CVE-2022-3860  | Web Application  | SQL Injection(SQLi)     | [Link 2 PoC](https://wpscan.com/vulnerability/d99ce21f-fbb6-429c-aa3b-19c4a5eb7557) 
+| CVE-2022-3860  | Web Application  | SQL Injection(SQLi)     | [Link 2 PoC](https://wpscan.com/vulnerability/d99ce21f-fbb6-429c-aa3b-19c4a5eb7557)
+| CVE-2023-4724  | Web Application  | SQL Injection(SQLi)     | [Link 2 PoC](https://www.unlock-security.it/it/security-advisory/cve-2023-4724-cve-2023-5882-wp-all-export/)
+| CVE-2023-5882  | Web Application  | SQL Injection(SQLi)     | [Link 2 PoC]([https://wpscan.com/vulnerability/d99ce21f-fbb6-429c-aa3b-19c4a5eb7557](https://wpscan.com/vulnerability/72be4b5c-21be-46af-a3f4-08b4c190a7e2/))
 
 ## CTF Writeups
 | Name           | Field            | Vulnerability           | Writeup                                                                            | Platform
