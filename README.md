@@ -14,7 +14,7 @@ Analysis of vulnerabilities from **security audit** || **CTF** (Capture the Flag
 | CVE-2023-4724  | Web Application  | SQL Injection(SQLi)     | [Link 2 PoC](https://www.unlock-security.it/it/security-advisory/cve-2023-4724-cve-2023-5882-wp-all-export/)
 | CVE-2023-5882  | Web Application  | SQL Injection(SQLi)     | [Link 2 PoC](https://wpscan.com/vulnerability/72be4b5c-21be-46af-a3f4-08b4c190a7e2/)
 | CVE-2024-XXXX  | Mobile - Android | Open arbitrary URLs     | WiP
-| CVE-2024-23710 | Mobile - Android | Elevation of Priv (EoP) | [Link 2 PoC]()
+| CVE-2024-23710 | Mobile - Android | Elevation of Priv (EoP) | WiP
 
 ## CTF Writeups
 | Name           | Field            | Vulnerability           | Writeup                                                                            | Platform
