@@ -1,6 +1,6 @@
 # My days and not
 
-Analysis of vulnerabilities from **security audit** || **CTF** (Capture the Flag).
+Analysis of vulnerabilities from **Security Audit** || **Bug Bounty** || **Security advisories** || **CTF**.
 
 ## CVE Analysis list
 
